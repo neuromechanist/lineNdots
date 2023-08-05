@@ -35,7 +35,3 @@ Edit `lineNdots/__init__.py`, and `lineNdots/version.py` with the information sp
 This very file (`README.md`) should be edited to reflect what your project is about.
 
 At this point, make another commit, and continue to develop your own code based on this template.
-
-
-### Contributing
-If you wish to make any changes (e.g. add documentation, tests, continuous integration, etc.), please follow the [Shablona](https://github.com/uwescience/lineNdots) template.
