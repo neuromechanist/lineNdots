@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "../stepping_coContraction"
+		},
+		{
+			"path": "../seaborn"
 		}
 	],
 	"settings": {}
