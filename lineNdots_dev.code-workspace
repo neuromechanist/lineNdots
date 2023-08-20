@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../ggrain"
+		},
+		{
+			"path": "../stepping_coContraction"
 		}
 	],
 	"settings": {}

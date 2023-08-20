@@ -1,37 +1,42 @@
-## lineNdots
-A bare-bones template for Python packages, ready for use with setuptools (PyPI), pip, and py.test.
+# lineNdots
 
-### Using this as a template
-Let's assume that you want to create a small scientific Python project called `smallish`.
+[RainCloud](https://github.com/njudd/ggrain) is an inspiration for having beautiful and meaningful plots, especially for longitudinal data (e.g., repeated measures experiments with pre and post or multiple conditions). However, there are some drawbacks especially for the Python version of the RainCloud plots that made me work on lineNdots:
 
-To use this repository as a template, click the green "use this template" button on the front page of the "lineNdots" repository.
+1. The longitudinal aspect is not complete in the Python version of RainCloud. The R version nicely provide hairline plots between individual data point for the longitudinal data. However, the Python version lacks this feature.
+2. KDEs and box plots are not always the best visualization. While KDEs are very nice and informative when there is a good amount of data points (>30), for smaller distributions, which is often the case in biomechanics, they can be misleading. Further, box plots mainly reflect the median and IQRs and the range of the data, whereas the statistical tests performed on the data are usually comparing the mean and standard deviation. This creates a discrepancy between the statistics and the presented data. The problem sis more pronounced with smaller populations as there would be possibly bigger difference between the median and mean.
 
-In "Repository name" enter the name of your project. For example, enter `smallish` here. After that, you can hit the "Create repository from template" button.
+lineNdots tries to address these two main issues. Further, I have tried to work mainly within the boundaries of the Seaborn toolbox and manipulated its variables to achieve my plots. So, as long as you can pass the data as a Seaborn stripplot, you should also be able to plot lineNdots, without additional arguments. However, you can control lineNdots and override its defaults with additional arguments. Here are the synopsis the features of the lineNdots toolbox:
 
-You should then be able to clone the new repo into your machine. You will want to change the names of the files. For example, you will want to move `lineNdots/lineNdots.py` to be called `smallish/smallish.py`
-```
-git mv lineNdots smallish
-git mv smallish/lineNdots.py smallish/smallish.py
-git mv smallish/tests/test_lineNdots.py smallish/tests/test_smallish.py
-```
+1. Longitudinal data are connected by individual hairlines, unless set to False.
+2. KDEs are removed. Box plots are replaced by a central dot and line, which by default indicate average and STE.
+3. The values ventral dot and the lines can be changed to median and IQR or any other quantity. Just pass the function.
+4. Enjoy using Seaborn's awesome color pallets and features. lineNdots just moves Seaborn elements around.
 
-Make a commit recording these changes. Something like:
-```
-git commit -a -m "Moved names from `lineNdots` to `smallish`"
-```
+## Installation
+Use PyPi or pull from this repo and do an installation:
 
-You will want to edit a few more places that still have `lineNdots` in them. Type the following to see where all these files are:
-```
-git grep lineNdots
+```shell
+pip install lineNdots
 ```
 
-You can replace `lineNdots` for `smallish` quickly with:
+## How to use
+Similar to a stripplot, plot using lineNdots:
+
+```Python
+import lineNdots as lnd
+
+lnd.lnd(data=box_data, y='average CI', x='age', ax=ax[i], palette='Set2', adtnl_space=0.2,
+        mean_size=0.3, size=10, lw=4)
 ```
-git grep -l 'lineNdots' | xargs sed -i 's/lineNdots/smallish/g'
-```
 
-Edit `lineNdots/__init__.py`, and `lineNdots/version.py` with the information specific to your project.
+## Development path
+Upon completion!, lineNdots should be able to function similar to ggrain, but in Python. To achieve this goal, we need smaller steps:
 
-This very file (`README.md`) should be edited to reflect what your project is about.
-
-At this point, make another commit, and continue to develop your own code based on this template.
+- [ ] control of the `stripplot` on left or right, as well as flipping them with longitudinal data
+  - `rain.side: Which side to display the rainclouds: 'l' for left, 'r' for right and 'f' for flanking`
+- [ ] It is all about the **hairlines**.
+- [ ] make center dot and lines customizable.
+- [ ] create unit tests
+- [ ] afford complex plots, like the following ggrain feature set: `id.long.var, cov, y-jittering`
+- [ ] create documentation
+- [ ] release beta and get feedback
