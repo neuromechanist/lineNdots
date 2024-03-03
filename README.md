@@ -1,6 +1,9 @@
 # lineNdots
 
-[RainCloud](https://github.com/njudd/ggrain) is an inspiration for having beautiful and meaningful plots, especially for longitudinal data (e.g., repeated measures experiments with pre and post or multiple conditions). However, there are some drawbacks especially for the Python version of the RainCloud plots that made me work on lineNdots:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Introduction
+**lineNdots** is a Python toolbox to create beautiful and meaningful plots, especially for longitudinal data (e.g., repeated measures experiments with pre and post or multiple conditions). It is inspired by the [RainCloud](https://github.com/njudd/ggrain) is an inspiration for having beautiful and meaningful plots, especially for longitudinal data (e.g., repeated measures experiments with pre and post or multiple conditions). However, there are some drawbacks especially for the Python version of the RainCloud plots that made me work on lineNdots:
 
 1. The longitudinal aspect is not complete in the Python version of RainCloud. The R version nicely provide hairline plots between individual data point for the longitudinal data. However, the Python version lacks this feature.
 2. KDEs and box plots are not always the best visualization. While KDEs are very nice and informative when there is a good amount of data points (>30), for smaller distributions, which is often the case in biomechanics, they can be misleading. Further, box plots mainly reflect the median and IQRs and the range of the data, whereas the statistical tests performed on the data are usually comparing the mean and standard deviation. This creates a discrepancy between the statistics and the presented data. The problem sis more pronounced with smaller populations as there would be possibly bigger difference between the median and mean.
