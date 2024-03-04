@@ -25,12 +25,15 @@ CLASSIFIERS = ["Development Status :: 3 - Alpha",
                "Topic :: Scientific/Engineering"]
 
 # Description should be a one-liner:
-description = "lineNdots: Put a one-liner description of your code here"
+description = "lineNdots: simple line and dot plots for data visualization."
 # Long description will go up on the pypi page
 long_description = """
+LineNdots
+=========
 LineNdots is a straightforward implementation of plots with lines as range and dots as data points.
 It is heavliy inspired from the `ggrain` and `raincloud` packages in R. However, it does not include the singautre
 KDE plot of the `raincloud` package.
+
 Also, LineNdots adds the signature single line plots for the individual data points,
 which was missing in the ported `ggrain` package to python (PtitPrince).
 
