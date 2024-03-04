@@ -56,5 +56,8 @@ MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
 PACKAGE_DATA = {'fetch_citations': [pjoin('data', '*')]}
-REQUIRES = ["pandas", "scholarly"]
+REQUIRES = ['seaborn>=0.12',
+            'matplotlib',
+            'numpy>=1.20',
+            'pandas>=2.0']
 PYTHON_REQUIRES = ">= 3.9"
