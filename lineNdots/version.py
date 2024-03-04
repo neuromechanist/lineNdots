@@ -28,24 +28,30 @@ CLASSIFIERS = ["Development Status :: 3 - Alpha",
 description = "lineNdots: Put a one-liner description of your code here"
 # Long description will go up on the pypi page
 long_description = """
-lineNdots: Put a longer description of your code here.
+LineNdots is a straightforward implementation of plots with lines as range and dots as data points.
+It is heavliy inspired from the `ggrain` and `raincloud` packages in R. However, it does not include the singautre
+KDE plot of the `raincloud` package.
+Also, LineNdots adds the signature single line plots for the individual data points,
+which was missing in the ported `ggrain` package to python (PtitPrince).
+
+(c) 2024, Seyed Yahya Shirazi, Swartz Center for Computational Neuroscience, University of California, San Diego
 """
 
 NAME = "lineNdots"
-MAINTAINER = "Graham Findlay"
-MAINTAINER_EMAIL = "gfindlay@wisc.edu"
+MAINTAINER = "Seyed Yahya Shirazi"
+MAINTAINER_EMAIL = "shirazi@ieee.org"
 DESCRIPTION = description
 LONG_DESCRIPTION = long_description
-URL = "http://github.com/CSC-UW/lineNdots"
+URL = "http://github.com/neuromechanist/lineNdots"
 DOWNLOAD_URL = ""
 LICENSE = "MIT"
-AUTHOR = "Graham Findlay"
-AUTHOR_EMAIL = "gfindlay@wisc.edu"
+AUTHOR = "Seyed Yahya Shirazi"
+AUTHOR_EMAIL = "shirazi@ieee.org"
 PLATFORMS = "OS Independent"
 MAJOR = _version_major
 MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
-PACKAGE_DATA = {'lineNdots': [pjoin('data', '*')]}
-REQUIRES = ["numpy"]
-PYTHON_REQUIRES = ">= 3.7"
+PACKAGE_DATA = {'fetch_citations': [pjoin('data', '*')]}
+REQUIRES = ["pandas", "scholarly"]
+PYTHON_REQUIRES = ">= 3.9"

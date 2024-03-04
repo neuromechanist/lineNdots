@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 PACKAGES = find_packages()
 
 # Get version and release info
-ver_file = os.path.join('fetch_citations', 'version.py')
+ver_file = os.path.join('lineNdots', 'version.py')
 with open(ver_file) as f:
     exec(f.read())
 
