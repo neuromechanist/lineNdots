@@ -15,9 +15,9 @@ def lnd(
 
     for i, art in enumerate(ax.collections):
         try:
-            offsets = art.get_offsets()
-            average = offsets.mean(axis=0)  # first number is x (mean position), second is y (mean value)
-            std = offsets.std(axis=0)
+            offsets = art.get_offsets().data
+            average = offsets.mean(axis=0).data  # first number is x (mean position), second is y (mean value)
+            std = offsets.std(axis=0).data
             if x is not None:
                 if average[0] < i // 2:
                     art.set_offsets(offsets - [adtnl_space, 0])
@@ -35,7 +35,7 @@ def lnd(
                     color=art.get_facecolor()[0], lw=lw)
             ax.plot(average[0], average[1], markersize=mean_size * 100, marker='o',
                     markeredgecolor=art.get_facecolor()[0], markerfacecolor='w', markeredgewidth=lw + 1)
-        except IndexError:
+        except Exception:
             if verbose:
                 print('empty collection encountered')
 
