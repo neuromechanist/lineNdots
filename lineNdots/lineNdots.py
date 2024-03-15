@@ -1,6 +1,6 @@
 
 import seaborn as sns
-
+import numpy.ma as ma
 
 def lnd(
     data, y, hue, palette, ax, colors, line, dots, average, flipped, verbose, adtnl_space, intr_space, mean_size,
@@ -15,9 +15,9 @@ def lnd(
 
     for i, art in enumerate(ax.collections):
         try:
-            offsets = art.get_offsets().data
-            average = offsets.mean(axis=0).data  # first number is x (mean position), second is y (mean value)
-            std = offsets.std(axis=0).data
+            offsets = ma.getdata(art.get_offsets())
+            average = offsets.mean(axis=0)  # first number is x (mean position), second is y (mean value)
+            std = offsets.std(axis=0)
             if x is not None:
                 if average[0] < i // 2:
                     art.set_offsets(offsets - [adtnl_space, 0])
