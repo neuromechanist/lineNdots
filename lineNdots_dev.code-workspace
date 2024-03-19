@@ -19,5 +19,7 @@
 			"path": "../fetch_citations"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"docwriter.style": "NumPy"
+	}
 }

@@ -1,11 +1,15 @@
 
 import seaborn as sns
 import numpy.ma as ma
+import matplotlib.pyplot as plt
+
 
 def lnd(
     data, y, hue, palette, ax, colors, line, dots, average, flipped, verbose, adtnl_space, intr_space, mean_size,
     size, lw, x=None
 ):
+    if ax is None:
+        _, ax = plt.subplots(1, 1)
     if x is not None:
         ax = sns.stripplot(data=data, x=x, y=y, hue=hue, palette=palette, ax=ax, dodge=True, size=size)
     else:
@@ -29,11 +33,12 @@ def lnd(
                 art.set_offsets(offsets - [average[0] - i + adtnl_space, 0])
                 average[0] = i + adtnl_space
 
-            if colors is not None:
-                art.set_facecolor(colors[data[hue].unique()[i % 2]][i // 2])
+            # if colors is not None:
+            # art.set_facecolor(colors[data[hue].unique()[i % 2]][i // 2])
+            art.set_facecolor(palette[i % 2])
             ax.plot([average[0], average[0]], [average[1] - std[1], average[1] + std[1]],
                     color=art.get_facecolor()[0], lw=lw)
-            ax.plot(average[0], average[1], markersize=mean_size * 100, marker='o',
+            ax.plot(average[0], average[1], markersize=mean_size, marker='o',
                     markeredgecolor=art.get_facecolor()[0], markerfacecolor='w', markeredgewidth=lw + 1)
         except Exception:
             if verbose:
