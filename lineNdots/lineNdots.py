@@ -1,6 +1,6 @@
 
 import seaborn as sns
-import numpy.ma as ma
+import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -19,7 +19,7 @@ def lnd(
 
     for i, art in enumerate(ax.collections):
         try:
-            offsets = ma.getdata(art.get_offsets())
+            offsets = np.ma.getdata(art.get_offsets())
             average = offsets.mean(axis=0)  # first number is x (mean position), second is y (mean value)
             std = offsets.std(axis=0)
             if x is not None:
@@ -44,7 +44,13 @@ def lnd(
             if verbose:
                 print('empty collection encountered')
 
-    if x is None:
-        ax.margins(x=0.3)
+    # Add horizontal padding
+    ax.margins(x=x_padding)
+
+    # add/remove legend
+    if legend:
+        ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    else:
+        ax.get_legend().remove()
 
     return ax
