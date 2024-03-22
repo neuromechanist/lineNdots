@@ -49,6 +49,7 @@ for i, art in enumerate(ax.collections):
 
 # %% Plot with lnd
 lnd(
-    data, 'y', 'hue', 'x', palette=palette, ax=None, colors=None, line=None, dots=None, flipped=None,
+    data, 'y', 'hue', 'x', palette=palette, agg_function=np.median, 
+    ax=None, colors=None, line=None, dots=None, flipped=None,
     verbose=False, adtnl_space=0.1, intr_space=0, mean_size=20, size=10, lw=2)
 # %%
