@@ -37,16 +37,18 @@ def lnd(
             offsets = np.ma.getdata(art.get_offsets())
             agg = agg_function(offsets, axis=0)  # first number is x (agg position), second is y (agg value)
             varx = var_function(offsets, axis=0)  # varx is the variability measure
+
+            mux = -1 if flipped else 1  # mux is the multiplier for flipped
             if x is not None:
                 if agg[0] < i // 2:
-                    art.set_offsets(offsets - [adtnl_space, 0])
-                    agg[0] = agg[0] + adtnl_space
+                    art.set_offsets(offsets - [adtnl_space, 0] * mux)
+                    agg[0] = agg[0] + adtnl_space * mux
                 else:
-                    art.set_offsets(offsets + [adtnl_space, 0])
-                    agg[0] = agg[0] - adtnl_space
+                    art.set_offsets(offsets + [adtnl_space, 0] * mux)
+                    agg[0] = agg[0] - adtnl_space * mux
             else:
-                art.set_offsets(offsets - [agg[0] - i + adtnl_space, 0])
-                agg[0] = i + adtnl_space
+                art.set_offsets(offsets - [agg[0] - i + adtnl_space * mux, 0])
+                agg[0] = i + adtnl_space * mux
 
             art.set_facecolor(palette[i % 2])
             if line:
@@ -59,6 +61,8 @@ def lnd(
             if verbose:
                 print('empty collection encountered')
 
+    # Set the x- axis range to include all the data
+    ax.set_xlim(ax.get_xlim()[0] - 0.5, ax.get_xlim()[1] + 0.5)
     # Add horizontal padding
     ax.margins(x=x_padding)
 
