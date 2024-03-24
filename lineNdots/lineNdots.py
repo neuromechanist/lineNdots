@@ -1,6 +1,5 @@
-
-import seaborn as sns
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 
@@ -50,26 +49,27 @@ def lnd(
                 art.set_offsets(offsets - [agg[0] - i + adtnl_space * mux, 0])
                 agg[0] = i + adtnl_space * mux
 
-            art.set_facecolor(palette[i % 2])
+            art.set_facecolor(palette[i % len(palette)])
             if line:
                 ax.plot([agg[0], agg[0]], [agg[1] - varx[1], agg[1] + varx[1]],
                         color=art.get_facecolor()[0], lw=lw)
             if dots:
                 ax.plot(agg[0], agg[1], markersize=mean_size, marker=dot_marker,
                         markeredgecolor=art.get_facecolor()[0], markerfacecolor='w', markeredgewidth=lw + 1)
-        except Exception:
+        except Exception as e:
             if verbose:
-                print('empty collection encountered')
+                print(f'Error processing collection: {e}')
 
-    # Set the x- axis range to include all the data
-    ax.set_xlim(ax.get_xlim()[0] - 0.5, ax.get_xlim()[1] + 0.5)
-    # Add horizontal padding
+    # Set the x-axis range to include all the data and adjust for horizontal padding
+    ax.set_xlim(ax.get_xlim()[0] - 0.1, ax.get_xlim()[1] + 0.1)
     ax.margins(x=x_padding)
 
-    # add/remove legend
+    # Add or remove legend
     if legend:
         ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     else:
-        ax.get_legend().remove()
+        legend = ax.get_legend()
+        if legend:
+            legend.remove()
 
     return ax
