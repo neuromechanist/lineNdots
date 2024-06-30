@@ -40,10 +40,10 @@ def lnd(
             mux = -1 if flipped else 1  # mux is the multiplier for flipped
             if x is not None:
                 if agg[0] < i // 2:
-                    art.set_offsets(offsets - [adtnl_space, 0] * mux)
+                    art.set_offsets(offsets - [adtnl_space * mux, 0])
                     agg[0] = agg[0] + adtnl_space * mux
                 else:
-                    art.set_offsets(offsets + [adtnl_space, 0] * mux)
+                    art.set_offsets(offsets + [adtnl_space * mux, 0])
                     agg[0] = agg[0] - adtnl_space * mux
             else:
                 art.set_offsets(offsets - [agg[0] - i + adtnl_space * mux, 0])
@@ -61,7 +61,7 @@ def lnd(
                 print(f'Error processing collection: {e}')
 
     # Set the x-axis range to include all the data and adjust for horizontal padding
-    ax.set_xlim(ax.get_xlim()[0] - 0.1, ax.get_xlim()[1] + 0.1)
+    ax.set_xlim(ax.get_xlim()[0] - mux * 0.1, ax.get_xlim()[1] + 0.2 - mux * 0.1)
     ax.margins(x=x_padding)
 
     # Add or remove legend
