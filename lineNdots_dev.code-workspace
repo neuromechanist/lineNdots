@@ -11,12 +11,6 @@
 		},
 		{
 			"path": "../stepping_coContraction"
-		},
-		{
-			"path": "../seaborn"
-		},
-		{
-			"path": "../fetch_citations"
 		}
 	],
 	"settings": {
