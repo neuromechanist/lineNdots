@@ -8,7 +8,7 @@ def lnd(
     agg_function=np.mean, var_function=np.std,
     palette=None, ax=None, colors=None,
     line=True, dots=True, dot_marker='o', flipped=False,
-    verbose=False, adtnl_space=0.1, mean_size=20, size=10, lw=2, x_padding=0.1, legend=False,
+    verbose=False, adtnl_space=0.1, mean_size=20, size=10, lw=2, padding=0.1, legend=False,
     hairlines=False, hairline_color='gray', hairline_style='--', hairline_width=0.5
 ) -> plt.Axes:
     # Only one of the color and palette can be provided
@@ -76,8 +76,13 @@ def lnd(
                         color=hairline_color, linestyle=hairline_style, lw=hairline_width)
 
     # Set the x-axis range to include all the data and adjust for horizontal padding
-    ax.set_xlim(ax.get_xlim()[0] - mux * 0.1, ax.get_xlim()[1] + 0.2 - mux * 0.1)
-    ax.margins(x=x_padding)
+# Adjust x and y limits to center the figure
+    x_min, x_max = ax.get_xlim()
+    y_min, y_max = ax.get_ylim()
+    x_range = x_max - x_min
+    y_range = y_max - y_min
+    ax.set_xlim(x_min - padding * x_range, x_max + padding * x_range)
+    ax.set_ylim(y_min - padding * y_range, y_max + padding * y_range)
 
     # Add or remove legend
     if legend:
