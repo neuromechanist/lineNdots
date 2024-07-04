@@ -5,18 +5,17 @@ import pandas as pd
 import seaborn as sns
 
 # %% Create data
-# Set the seed for reproducibility
 np.random.seed(0)
 
 # Create a random dataset
 data = pd.DataFrame({
-    'x': np.random.choice(['A', 'B', 'C'], 20),
-    'y': np.random.normal(0, 1, 20),
-    'hue': np.random.choice(['red', 'blue'], 20)
+    'x': np.random.choice(['A', 'B', 'C'], 100),
+    'y': np.random.normal(0, 1, 100),
+    'hue': np.random.choice(['red', 'blue'], 100)
 })
 
 # Create a palette
-palette = sns.color_palette("pastel")
+palette = sns.color_palette("pastel", 2)
 
 # %% Plot without Line and Dots
 # Create a stripplot
@@ -48,7 +47,6 @@ for i, art in enumerate(ax.collections):
 
 # %% Plot with lnd
 lnd(
-    data, 'y', 'hue', 'x', palette=palette, agg_function=np.median, 
-    ax=None, colors=None, line=None, dots=None, flipped=None,
-    verbose=False, adtnl_space=0.1, intr_space=0, mean_size=20, size=10, lw=2)
-# %%
+    data, 'y', 'hue', 'x', palette=None, agg_function=np.median, var_function=np.std,
+    ax=None, colors=list(palette), line=True, dots=True, flipped=False,
+    verbose=False, adtnl_space=0.1, mean_size=20, size=10, lw=2)

@@ -130,7 +130,7 @@ def lnd(
 
             scatter_offsets[hue_values[i % len(hue_values)]].append(art.get_offsets())
 
-            art.set_facecolor(palette[i % len(palette)])
+            # art.set_facecolor(palette[i % len(palette)])
             if line:
                 ax.plot([agg[0], agg[0]], [agg[1] - varx[1], agg[1] + varx[1]],
                         color=art.get_facecolor()[0], lw=lw)
