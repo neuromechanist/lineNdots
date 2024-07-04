@@ -3,7 +3,6 @@ from lineNdots import lnd
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
 
 # %% Create data
 # Set the seed for reproducibility
@@ -11,9 +10,9 @@ np.random.seed(0)
 
 # Create a random dataset
 data = pd.DataFrame({
-    'x': np.random.choice(['A', 'B', 'C'], 100),
-    'y': np.random.normal(0, 1, 100),
-    'hue': np.random.choice(['red', 'blue'], 100)
+    'x': np.random.choice(['A', 'B', 'C'], 20),
+    'y': np.random.normal(0, 1, 20),
+    'hue': np.random.choice(['red', 'blue'], 20)
 })
 
 # Create a palette
