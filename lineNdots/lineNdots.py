@@ -67,13 +67,8 @@ def lnd(
                 print(f'Error processing collection: {e}')
 
     # Draw hairlines for paired comparisons
-    if hairlines and len(hue_values) == 2:
-        for category in data[x].unique():
-            red_offsets = np.vstack([offset for offset in scatter_offsets[hue_values[0]]])
-            blue_offsets = np.vstack([offset for offset in scatter_offsets[hue_values[1]]])
-            for red, blue in zip(red_offsets, blue_offsets):
-                ax.plot([red[0], blue[0]], [red[1], blue[1]],
-                        color=hairline_color, linestyle=hairline_style, lw=hairline_width)
+    if hairlines:
+        _drawHairlines(data, x, ax, hairline_color, hairline_style, hairline_width, hue_values, scatter_offsets)
 
     # Set the x-axis range to include all the data and adjust for horizontal padding
 # Adjust x and y limits to center the figure
@@ -93,3 +88,13 @@ def lnd(
             legend.remove()
 
     return ax
+
+
+def _drawHairlines(data, x, ax, hairline_color, hairline_style, hairline_width, hue_values, scatter_offsets):
+    if len(hue_values) == 2:
+        for category in data[x].unique():
+            pre_offsets = np.vstack([offset for offset in scatter_offsets[hue_values[0]]])
+            post_offsets = np.vstack([offset for offset in scatter_offsets[hue_values[1]]])
+            for pre, post in zip(pre_offsets, post_offsets):
+                ax.plot([pre[0], post[0]], [pre[1], post[1]],
+                        color=hairline_color, linestyle=hairline_style, lw=hairline_width)
