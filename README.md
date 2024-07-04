@@ -26,20 +26,22 @@ pip install lineNdots
 Similar to a stripplot, plot using lineNdots:
 
 ```Python
-import lineNdots as lnd
+from lineNdots import lnd
 
 lnd.lnd(data=box_data, y='average CI', x='age', ax=ax[i], palette='Set2', adtnl_space=0.2,
         mean_size=0.3, size=10, lw=4)
 ```
 
+Also, see the sample notebook in the `scripts` directory.
+
 ## Development path
 Upon completion!, lineNdots should be able to function similar to ggrain, but in Python. To achieve this goal, we need smaller steps:
 
-- [ ] control of the `stripplot` on left or right, as well as flipping them with longitudinal data
+- [x] control of the `stripplot` on left or right, as well as flipping them with longitudinal data
   - `rain.side: Which side to display the rainclouds: 'l' for left, 'r' for right and 'f' for flanking`
-- [ ] It is all about the **hairlines**.
-- [ ] make center dot and lines customizable.
+- [x] It is all about the **hairlines**.
+- [x] make center dot and lines customizable.
 - [ ] create unit tests
-- [ ] afford complex plots, like the following ggrain feature set: `id.long.var, cov, y-jittering`
+- [ ] ~~afford complex plots, like the following ggrain feature set: `id.long.var, cov, y-jittering`~~ (will not be implemented soon)
 - [ ] create documentation
 - [ ] release beta and get feedback
