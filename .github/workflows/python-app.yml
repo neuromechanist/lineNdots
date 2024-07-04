@@ -1,4 +1,4 @@
-name: Python application
+name: test lnd
 
 on: [push, pull_request]
 
