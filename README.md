@@ -53,7 +53,7 @@ Upon completion!, lineNdots should be able to function similar to ggrain, but in
   - `rain.side: Which side to display the rainclouds: 'l' for left, 'r' for right and 'f' for flanking`
 - [x] It is all about the **hairlines**.
 - [x] make center dot and lines customizable.
-- [ ] create unit tests
+- [x] create unit tests *(also added to GitHub actions)*
 - [ ] ~~afford complex plots, like the following ggrain feature set: `id.long.var, cov, y-jittering`~~ (will not be implemented soon)
 - [ ] create documentation
 - [ ] release beta and get feedback
