@@ -11,6 +11,81 @@ def lnd(
     verbose=False, adtnl_space=0.1, mean_size=20, size=10, lw=2, padding=0.1, legend=False,
     hairlines=False, hairline_color='gray', hairline_style='--', hairline_width=0.5
 ) -> plt.Axes:
+    """
+    Plot line and dots for grouped data.
+
+    Parameters:
+    -----------
+    data : DataFrame
+        The input data.
+    y : str
+        The name of the column to be plotted on the y-axis.
+    hue : str
+        The name of the column used for grouping the data.
+    x : str, optional
+        The name of the column to be plotted on the x-axis. If not provided, the x-axis will be categorical.
+    agg_function : function, optional
+        The function used to aggregate the data points within each group. Default is np.mean.
+    var_function : function, optional
+        The function used to calculate the variability measure of the data points within each group. Default is np.std.
+    palette : str or list, optional
+        The color palette to be used for the groups. If not provided, a default palette will be used.
+    ax : Axes object, optional
+        The matplotlib Axes object to draw the plot on. If not provided, a new figure and Axes object will be created.
+    colors : list, optional
+        Deprecated argument. Use palette instead.
+    line : bool, optional
+        Whether to plot the line connecting the aggregated points. Default is True.
+    dots : bool, optional
+        Whether to plot the individual data points as dots. Default is True.
+    dot_marker : str, optional
+        The marker style for the dots. Default is 'o'.
+    flipped : bool, optional
+        Whether to flip the x-axis. Default is False.
+    verbose : bool, optional
+        Whether to display verbose warnings. Default is False.
+    adtnl_space : float, optional
+        Additional space between the aggregated points. Default is 0.1.
+    mean_size : float, optional
+        The size of the marker for the aggregated points. Default is 20.
+    size : float, optional
+        The size of the marker for the individual data points. Default is 10.
+    lw : float, optional
+        The linewidth for the line and marker edges. Default is 2.
+    padding : float, optional
+        The padding factor for adjusting the x and y axis limits. Default is 0.1.
+    legend : bool, optional
+        Whether to display the legend. Default is False.
+    hairlines : bool, optional
+        Whether to draw hairlines for paired comparisons. Default is False.
+    hairline_color : str, optional
+        The color of the hairlines. Default is 'gray'.
+    hairline_style : str, optional
+        The line style of the hairlines. Default is '--'.
+    hairline_width : float, optional
+        The linewidth of the hairlines. Default is 0.5.
+
+    Returns:
+    --------
+    ax : Axes object
+        The matplotlib Axes object containing the plot.
+
+    Raises:
+    -------
+    ValueError
+        If both colors and palette are provided.
+
+    Notes:
+    ------
+    - Only one of the color and palette can be provided.
+    - If verbose is False, warnings will be suppressed.
+    - The x-axis range will be adjusted to include all the data and adjust for horizontal padding.
+    - The y-axis range will be adjusted to include all the data and adjust for vertical padding.
+    - If legend is True, the legend will be displayed on the right side of the plot.
+    - If legend is False, the legend will be removed from the plot.
+    - If hairlines is True, hairlines will be drawn for paired comparisons.
+    """
+
     # Only one of the color and palette can be provided
     if colors is not None and palette is not None:
         raise ValueError('Only one of the color and palette can be provided')
@@ -91,6 +166,22 @@ def lnd(
 
 
 def _drawHairlines(data, x, ax, hairline_color, hairline_style, hairline_width, hue_values, scatter_offsets):
+    """
+    Draw hairlines between scatter plot points based on hue values.
+
+    Parameters:
+    data (pandas.DataFrame): The input data.
+    x (str): The column name representing the x-axis values.
+    ax (matplotlib.axes.Axes): The matplotlib axes object to draw on.
+    hairline_color (str): The color of the hairlines.
+    hairline_style (str): The style of the hairlines.
+    hairline_width (float): The width of the hairlines.
+    hue_values (list): The list of hue values.
+    scatter_offsets (dict): The dictionary of scatter offsets.
+
+    Returns:
+    None
+    """
     if len(hue_values) == 2:
         for category in data[x].unique():
             pre_offsets = np.vstack([offset for offset in scatter_offsets[hue_values[0]]])
