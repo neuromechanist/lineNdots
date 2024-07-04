@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+[![test lnd](https://github.com/neuromechanist/lineNdots/actions/workflows/python-app.yml/badge.svg)](https://github.com/neuromechanist/lineNdots/actions/workflows/python-app.yml)
+
 ## Introduction
 **lineNdots** is a Python toolbox to create beautiful and meaningful plots, especially for longitudinal data (e.g., repeated measures experiments with pre and post or multiple conditions). It is inspired by the [RainCloud](https://github.com/njudd/ggrain) is an inspiration for having beautiful and meaningful plots, especially for longitudinal data (e.g., repeated measures experiments with pre and post or multiple conditions). However, there are some drawbacks especially for the Python version of the RainCloud plots that made me work on lineNdots:
 
