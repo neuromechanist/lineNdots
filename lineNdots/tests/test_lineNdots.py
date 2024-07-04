@@ -1,50 +1,59 @@
+
 import unittest
-import numpy as np
 import pandas as pd
-import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
-from .. import lnd
+from lineNdots.lineNdots import lnd
 
-
-class TestCombinedLnd(unittest.TestCase):
+class TestLineNdots(unittest.TestCase):
     def setUp(self):
-        # Set the seed for reproducibility
+        # Create a sample dataframe
         np.random.seed(0)
-
-        # Create a random dataset
         self.data = pd.DataFrame({
-            'x': np.random.choice(['A', 'B', 'C'], 100),
-            'y': np.random.normal(0, 1, 100),
-            'hue': np.random.choice(['red', 'blue'], 100)
+            'x': np.tile(np.arange(1, 6), 3),
+            'y': np.random.randn(15),
+            'hue': np.repeat(['A', 'B', 'C'], 5)
         })
 
-        # Create a palette
-        self.palette = sns.color_palette("hls", 8)
-
-    def test_lnd_with_x(self):
-        # Create a figure and axes
-        fig, ax = plt.subplots()
-
-        # Test the function with x
+    def test_lnd_basic(self):
+        # Test if lnd runs without errors
         try:
-            lnd(
-                self.data, 'y', 'hue', self.palette, ax, None, None, None, None, None, False, 0.1, 0.1, 10, 5, 1, 'x'
-            )
+            ax = lnd(self.data, y='y', hue='hue', x='x')
+            self.assertIsInstance(ax, plt.Axes)
         except Exception as e:
-            self.fail(f"lnd raised exception with x: {e}")
+            self.fail(f"lnd raised an exception {e}")
 
-    def test_lnd_without_x(self):
-        # Create a figure and axes
-        fig, ax = plt.subplots()
-
-        # Test the function without x
+    def test_lnd_no_x(self):
+        # Test if lnd runs without the x parameter
         try:
-            lnd(
-                self.data, 'y', 'hue', self.palette, ax, None, None, None, None, None, False, 0.1, 0.1, 10, 5, 1
-            )
+            ax = lnd(self.data, y='y', hue='hue')
+            self.assertIsInstance(ax, plt.Axes)
         except Exception as e:
-            self.fail(f"lnd raised exception without x: {e}")
+            self.fail(f"lnd raised an exception {e}")
 
+    def test_lnd_with_line_and_dots(self):
+        # Test if lnd runs with both line and dots
+        try:
+            ax = lnd(self.data, y='y', hue='hue', x='x', line=True, dots=True)
+            self.assertIsInstance(ax, plt.Axes)
+        except Exception as e:
+            self.fail(f"lnd raised an exception {e}")
+
+    def test_lnd_with_different_agg_function(self):
+        # Test if lnd runs with a different aggregation function
+        try:
+            ax = lnd(self.data, y='y', hue='hue', x='x', agg_function=np.median)
+            self.assertIsInstance(ax, plt.Axes)
+        except Exception as e:
+            self.fail(f"lnd raised an exception {e}")
+
+    def test_lnd_with_hairlines(self):
+        # Test if lnd runs with hairlines
+        try:
+            ax = lnd(self.data, y='y', hue='hue', x='x', hairlines=True)
+            self.assertIsInstance(ax, plt.Axes)
+        except Exception as e:
+            self.fail(f"lnd raised an exception {e}")
 
 if __name__ == '__main__':
     unittest.main()
