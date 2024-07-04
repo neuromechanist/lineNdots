@@ -1,7 +1,6 @@
 # lineNdots
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 [![test lnd](https://github.com/neuromechanist/lineNdots/actions/workflows/python-app.yml/badge.svg)](https://github.com/neuromechanist/lineNdots/actions/workflows/python-app.yml)
 
 ## Introduction
