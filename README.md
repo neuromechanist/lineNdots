@@ -13,13 +13,15 @@ lineNdots tries to address these two main issues. Further, I have tried to work 
 1. Longitudinal data are connected by individual hairlines, unless set to False.
 2. KDEs are removed. Box plots are replaced by a central dot and line, which by default indicate average and STE.
 3. The values ventral dot and the lines can be changed to median and IQR or any other quantity. Just pass the function.
-4. Enjoy using Seaborn's awesome color pallets and features. lineNdots just moves Seaborn elements around.
+4. Change anything on the plot, like the size of the dots, the width of the lines, the color of the lines, etc.
+5. Enjoy using Seaborn's awesome color pallets and features. lineNdots just moves Seaborn elements around.
+6. Change elements of the plot as you would with Seaborn, like the axis labels, the title, etc. with the same Seaborn commands.
 
 ## Installation
-Use PyPi or pull from this repo and do an installation:
+Pull from this repo, unzip the directory. Open a Terminal window and navigate to the directory. Then install using `pip`:
 
 ```shell
-pip install lineNdots
+pip install .
 ```
 
 ## How to use
@@ -28,11 +30,20 @@ Similar to a stripplot, plot using lineNdots:
 ```Python
 from lineNdots import lnd
 
-lnd.lnd(data=box_data, y='average CI', x='age', ax=ax[i], palette='Set2', adtnl_space=0.2,
-        mean_size=0.3, size=10, lw=4)
+lnd(
+    data, 'y', 'hue', 'x', palette=palette, agg_function=np.median, var_function=np.std,
+    ax=ax, colors=None, line=True, dots=True, flipped=True, legend=True,
+    verbose=False, adtnl_space=0.1, mean_size=20, size=10, lw=2, hairlines=True, hairline_style='-'
+)
 ```
 
-Also, see the sample notebook in the `scripts` directory.
+The arguments are similar to the Seaborn stripplot, with some additional arguments.
+
+Output:
+![lineNdots](scripts/sample_lnd.png)
+
+
+#### See the sample notebook in the `scripts` directory.
 
 ## Development path
 Upon completion!, lineNdots should be able to function similar to ggrain, but in Python. To achieve this goal, we need smaller steps:
